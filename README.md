@@ -38,25 +38,25 @@ To deploy to a dedicated MQTT broker, one has to be able to setup and run a serv
 
 To enjoy the outputs of this app, a MQTT client is required. The easiest is to use a MQTT client on a smartphone (there are several alternatives on the market).
 
-## Install and build the APP
-### Get the SDK
+## Install and build the project
+### Get the IDE
 This app has to be built using a board-specific IDE. 
-The roadmap for the IDE installation is described [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#installation-step-by-step "install and setup ESP IDF") for ESP32, and [here](https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#setup-toolchain "install and setup ESP8266 RTOS SDK") for ESP8266.
-Follow these instructions to
+The roadmap for the IDE installation is described [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#installation-step-by-step "install and setup ESP IDF"), for ESP32, and [here](https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#setup-toolchain "install and setup ESP8266 RTOS SDK"), for ESP8266.
+Follow the relevant instructions to
 - Install prerequisites for Windows, Linux, or macOS;
 - Get the relevant IDE (ESP IDF or ESP8266 RTOS SDK);
 - Set up the toolchain;
 - Set up the environment variables.
 
-### Get this app 
+### Get the source code
 Clone (or fork) this repository:
 ```sh
 git clone https://github.com/rytis-paskauskas/MiniQttSensor
 ```
 
 ### Build and flash
-The build process follows the standard workflow for the respective SDK. Although the underlying build tools are different for the two SDKs, the workflows are almost identical except for some semantic differences (use of `make` vs. `idf.py`).
-For instructions of the build process, see [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#step-6-connect-your-device "ESP IDF build workflow") and [here](https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#connect "ESP8266 RTOS SDK build workflow") for ESP32 and ESP8266 boards, respectively.
+The build process follows the standard workflow for the respective IDE. Although the underlying build tools are different for the two IDEs, the workflows are almost identical and differ only in semantics (use of `make` vs. `idf.py`).
+For instructions for the build process, see [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#step-6-connect-your-device "ESP IDF build workflow") and [here](https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#connect "ESP8266 RTOS SDK build workflow") for ESP32 and ESP8266 boards, respectively.
 
 Things could potentially get messy in the case of building for both types of boards.
 This project adopts several simple idiosynracies, described below, with the purpose of mitigating the issues.
@@ -65,17 +65,16 @@ The first issue is that the `sdkconfig` files are incompatible between the two S
 - start without a `sdkconfig` file and let the build tool generate a default one, or
 - use one of the default templates `sdkconfig.esp8266default` or `sdkconfig.esp32default`, for example `cp sdkconfig.esp8266default sdkconfig; make menuconfig`.
 
-For the same reason, the project is configured to use a non-standard build directory,  `build_esp8266` for ESP8266, and `build` (I can't get it to work cleanly with `build_esp32`) for ESP32.
+For the same reason, the project is configured to use a non-standard build directory,  `build_esp8266` for ESP8266, and `build` (not `build_esp32`, because I can't get it to work cleanly with CMake) for ESP32.
 
-See also `Makefile` and the `CMakeLists.txt` for respective control.
+See also `Makefile` and the `CMakeLists.txt` for respective control statements.
 
 ### Deploying the included client
 TBD.
 
 ## FAQ
 - Why this sensor? What is the accuracy of measurement?
-  See [this thread](https://forum.arduino.cc/t/compare-different-i2c-temperature-and-humidity-sensors-sht2x-sht3x-sht85/599609 "i2c sensor Arduino forum thread") for inspiration and/or possible alternatives.
-  Don't expect too much in terms of accuracy (my rule of thumb: ±1°C, ±10% RH).  
+  See [this thread](https://forum.arduino.cc/t/compare-different-i2c-temperature-and-humidity-sensors-sht2x-sht3x-sht85/599609 "i2c sensor Arduino forum thread") for inspiration and/or possible alternatives. Don't expect too much in terms of accuracy (my rule of thumb: ±1°C, ±10% RH).
 
 ## Authors
 
