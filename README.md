@@ -4,14 +4,15 @@ A fully functional IoT application for temperature and humidity sensing and data
 
 Deploy it on several devices to collect data from multiple locations.
 
-Use your private or any public MQTT broker.
-
 The app targets all ESP8266 and ESP32 boards. It has been tested with:
 - Wemos WiFi-ESP8266 DevKit
 - D1 Mini Pro Based on ESP8266EX
 - ESP32 DevKit
 
+Use your private or any public MQTT broker.
+
 Includes an (optional) "accumulator" client, which polls all data into a MySQL database and bins older data from previously disconnected instances.
+
 
 ## Hardware requirements
 
@@ -69,19 +70,37 @@ For the same reason, the project is configured to use a non-standard build direc
 
 See also `Makefile` and the `CMakeLists.txt` for respective control statements.
 
+## Clients
+
+The payload is formatted as a JSON string
+```text
+{measurement:{temperature: xx.xx,humidity: yy.yy}}
+```
+(and is exactly 57 bytes long).
+
 ### Deploying the included client
 TBD.
+
+### Other clients
+
+#### Mosquitto 
+[Eclipse Mosquitto](https://mosquitto.org) has a desktop client application that is quite convenient.
+
+Assuming that a broker has been setup on `localhost`, and its public certificate copied to `ca_certificates/broker.crt`, subscribe to all devices in verbose mode  (useful for debugging) like so:
+```sh
+mosquitto_sub -h localhost -p 8883 --cafile ca_certificates/broker.crt  -t 'sense/sht3x/#' -F %J  --pretty -v
+```
 
 ## FAQ
 - Why this sensor? What is the accuracy of measurement?
   See [this thread](https://forum.arduino.cc/t/compare-different-i2c-temperature-and-humidity-sensors-sht2x-sht3x-sht85/599609 "i2c sensor Arduino forum thread") for inspiration and/or possible alternatives. Don't expect too much in terms of accuracy (my rule of thumb: ±1°C, ±10% RH).
 
 ## Authors
-
 * [Rytis Paškauskas](https://github.com/rytis-paskauskas)
 
 ## License
-GPL V3.
+See LICENCE.
+
 ## Acknowledgments
 
 [@gschorcht](https://github.com/gschorcht) and  [@UncleRus](https://github.com/UncleRus) are acknowledged for providing the sht3x driver.
