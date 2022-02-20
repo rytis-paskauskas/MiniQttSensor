@@ -4,7 +4,7 @@ A fully functional IoT application for temperature and humidity sensing and data
 
 Deploy it on several devices to collect data from multiple locations.
 
-Use your private or any public MQTT broker [such as this one](https://test.mosquitto.org "mosquitto.org").
+Use your private or any public MQTT broker.
 
 Included is an (optional) simple "polling" client, which polls all data into a MySQL database and bins older data from previously disconnected instances.
 
@@ -25,7 +25,7 @@ This set-up is sufficient to build the app but additional items might be require
 - device(s) to read/display data (a smartphone, ...)
 
 ## Software prerequisited
-This app has to be built using a board-specific  [Integrated Development Environment](https://www.espressif.com/en/products/sdks/esp-idf: "ESP IDF by Espressif"):
+This app has to be built using a board-specific  [Integrated Development Environment](https://www.espressif.com/en/products/sdks/esp-idf "ESP IDF by Espressif"):
 - [*ESP IDF*](https://github.com/espressif/esp-idf "ESP-IDF on Github") for ESP32-based boards,
 -  for ESP8266-based boards.
 [*ESP8266 RTOS SDK*](https://github.com/espressif/ESP8266_RTOS_SDK "ESP8266 RTOS SDK on Github")https://github.com/espressif/ESP8266_RTOS_SDK
