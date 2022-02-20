@@ -55,8 +55,8 @@ git clone https://github.com/rytis-paskauskas/MiniQttSensor
 ```
 
 ### Build and flash
-The build process follows the standard workflow for the respective IDE. Although the underlying build tools are different for the two IDEs, the workflows are almost identical and differ only in semantics (use of `make` vs. `idf.py`).
-For instructions for the build process, see [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#step-6-connect-your-device "ESP IDF build workflow") and [here](https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#connect "ESP8266 RTOS SDK build workflow") for ESP32 and ESP8266 boards, respectively.
+Although the underlying build tools are different for the two IDEs, the workflows are almost identical and differ only in semantics (use of `make` vs. `idf.py`).
+This projects can be built using the standard workflow; see [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#step-6-connect-your-device "ESP IDF build workflow") and [here](https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#connect "ESP8266 RTOS SDK build workflow") for ESP32 and ESP8266 boards, respectively.
 
 Things could potentially get messy in the case of building for both types of boards.
 This project adopts several simple idiosynracies, described below, with the purpose of mitigating the issues.
