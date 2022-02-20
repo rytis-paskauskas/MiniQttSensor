@@ -84,4 +84,4 @@ TBD.
 GPL V3.
 ## Acknowledgments
 
-@gschorcht and @UncleRus are acknowledged for providing the sht3x driver.
+[@gschorcht](https://github.com/gschorcht) and  [@UncleRus](https://github.com/UncleRus) are acknowledged for providing the sht3x driver.
