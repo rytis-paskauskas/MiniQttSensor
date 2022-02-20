@@ -6,12 +6,12 @@ Deploy it on several devices to collect data from multiple locations.
 
 Use your private or any public MQTT broker.
 
-Included is an (optional) simple "polling" client, which polls all data into a MySQL database and bins older data from previously disconnected instances.
-
 The app targets all ESP8266 and ESP32 boards. It has been tested with:
 - Wemos WiFi-ESP8266 DevKit
 - D1 Mini Pro Based on ESP8266EX
 - ESP32 DevKit
+
+Includes an (optional) "accumulator" client, which polls all data into a MySQL database and bins older data from previously disconnected instances.
 
 ## Hardware requirements
 
@@ -27,8 +27,8 @@ This set-up is sufficient to build the app but additional items might be require
 ## Software prerequisited
 This app has to be built using a board-specific  [Integrated Development Environment](https://www.espressif.com/en/products/sdks/esp-idf "ESP IDF by Espressif"):
 - [*ESP IDF*](https://github.com/espressif/esp-idf "ESP-IDF on Github") for ESP32-based boards,
--  for ESP8266-based boards.
-[*ESP8266 RTOS SDK*](https://github.com/espressif/ESP8266_RTOS_SDK "ESP8266 RTOS SDK on Github")https://github.com/espressif/ESP8266_RTOS_SDK
+- [*ESP8266 RTOS SDK*](https://github.com/espressif/ESP8266_RTOS_SDK "ESP8266 RTOS SDK on Github") for ESP8266-based boards.
+
 To build the (optional) polling client the following are required:
 - Python
 - MySQL or Mariadb. The client must have `CREATE, WRITE, READ, SELECT TABLES` permissions on at least one database. Depending on the hosting service, root access might be necessary.
@@ -56,8 +56,8 @@ git clone https://github.com/rytis-paskauskas/MiniQttSensor
 
 ### SDK workflow
 
-The build process follows the standard workflow for the respective SDK. The workflows are identical for the two SDKs (for the two types of boards) except for some semantic differences (use of `make` vs. `idf.py`)
-For instructions on the building process, see [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#step-6-connect-your-device "ESP IDF build workflow") and [here](https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#connect "ESP8266 RTOS SDK build workflow") for ESP32 and ESP8266 boards, respectively.
+The build process follows the standard workflow for the respective SDK. Although the underlying build tools are different for the two SDKs, the workflows are almost identical except for some semantic differences (use of `make` vs. `idf.py`).
+For instructions of the build process, see [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#step-6-connect-your-device "ESP IDF build workflow") and [here](https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#connect "ESP8266 RTOS SDK build workflow") for ESP32 and ESP8266 boards, respectively.
 
 Things could potentially get messy in the case of building for both types of boards.
 This project adopts several simple idiosynracies, described below, with the purpose of mitigating the issues.
