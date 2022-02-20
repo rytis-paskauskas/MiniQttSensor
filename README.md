@@ -4,12 +4,17 @@ A fully functional IoT application for temperature and humidity sensing and data
 
 Deploy it on several devices to collect data from multiple locations.
 
-Use your private or any public MQTT broker.
-
 The app targets all ESP8266 and ESP32 boards. It has been tested with:
 - Wemos WiFi-ESP8266 DevKit
 - D1 Mini Pro Based on ESP8266EX
 - ESP32 DevKit
+
+Use your private or any public MQTT broker.
+The payload is formatted in the form
+```text
+{measurement:{temperature: xx.xx,humidity: yy.yy}}
+```
+(and is exactly 57 bytes long).
 
 Includes an (optional) "accumulator" client, which polls all data into a MySQL database and bins older data from previously disconnected instances.
 
