@@ -10,7 +10,8 @@ The app targets all ESP8266 and ESP32 boards. It has been tested with:
 - ESP32 DevKit
 
 Use your private or any public MQTT broker.
-The payload is formatted in the form
+
+The payload is formatted as a JSON string
 ```text
 {measurement:{temperature: xx.xx,humidity: yy.yy}}
 ```
