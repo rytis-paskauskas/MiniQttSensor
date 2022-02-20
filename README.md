@@ -69,19 +69,31 @@ For the same reason, the project is configured to use a non-standard build direc
 
 See also `Makefile` and the `CMakeLists.txt` for respective control statements.
 
+## Clients
+
 ### Deploying the included client
 TBD.
+
+### Other clients
+
+#### Mosquitto 
+[Eclipse Mosquitto](https://mosquitto.org) has a desktop client application that is quite convenient.
+
+Assuming that a broker has been setup on `localhost`, and its public certificate copied to `ca_certificates/broker.crt`, subscribe to all devices in verbose mode  (useful for debugging) like so:
+```sh
+mosquitto_sub -h localhost -p 8883 --cafile ca_certificates/broker.crt  -t 'sense/sht3x/#' -F %J  --pretty -v
+```
 
 ## FAQ
 - Why this sensor? What is the accuracy of measurement?
   See [this thread](https://forum.arduino.cc/t/compare-different-i2c-temperature-and-humidity-sensors-sht2x-sht3x-sht85/599609 "i2c sensor Arduino forum thread") for inspiration and/or possible alternatives. Don't expect too much in terms of accuracy (my rule of thumb: ±1°C, ±10% RH).
 
 ## Authors
-
 * [Rytis Paškauskas](https://github.com/rytis-paskauskas)
 
 ## License
-GPL V3.
+See LICENCE.
+
 ## Acknowledgments
 
 @gschorcht and @UncleRus are acknowledged for providing the sht3x driver.
