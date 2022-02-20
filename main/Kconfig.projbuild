@@ -1,0 +1,30 @@
+menu "IoT device configuration"
+    menu "MQTT settings"
+        config MQTT_BROKER_URI
+            string "Broker URI"
+            default "mqtts://192.168.1.1:8883"
+            help
+                The Broker's address (the part after slashes) should be the exactly as declared in the broker's certificate file.
+        config MQTT_CLIENT_TOPIC_HEADER
+            string "Topic basename"
+                default "sense/sht3x"
+                help
+                The actual topic will be constructed from this variable and the MAC address as BASENAME/MAC, i.e. each device running this app with a unique MAC address will get a unique topic. Additional information (warnings) will be published to BASENAME/log and the log message will carry the MAC identifier.
+    endmenu
+    menu "WiFi connection settings"
+        config WIFI_SSID
+            string "WiFi SSID"
+            default "ssid"
+        config WIFI_PASSWORD
+            string "WiFi Password"
+            default "password"
+    endmenu
+    menu "sht3x sensor settings"
+        config MEASUREMENT_REFRESH_PERIOD
+            int "Sensor measurement refresh period in seconds"
+            range 1 3600
+            default 5
+            help
+                Seconds to wait between two consecutive sensor measurements.
+    endmenu
+endmenu

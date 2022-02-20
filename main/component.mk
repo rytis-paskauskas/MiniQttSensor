@@ -1,0 +1,3 @@
+COMPONENT_EMBED_TXTFILES := ../ca_certificates/broker.crt
+COMPONENT_SRCDIRS := . deps
+COMPONENT_PRIV_INCLUDEDIRS := deps
