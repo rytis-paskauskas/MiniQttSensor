@@ -11,13 +11,8 @@ The app targets all ESP8266 and ESP32 boards. It has been tested with:
 
 Use your private or any public MQTT broker.
 
-The payload is formatted as a JSON string
-```text
-{measurement:{temperature: xx.xx,humidity: yy.yy}}
-```
-(and is exactly 57 bytes long).
-
 Includes an (optional) "accumulator" client, which polls all data into a MySQL database and bins older data from previously disconnected instances.
+
 
 ## Hardware requirements
 
@@ -76,6 +71,12 @@ For the same reason, the project is configured to use a non-standard build direc
 See also `Makefile` and the `CMakeLists.txt` for respective control statements.
 
 ## Clients
+
+The payload is formatted as a JSON string
+```text
+{measurement:{temperature: xx.xx,humidity: yy.yy}}
+```
+(and is exactly 57 bytes long).
 
 ### Deploying the included client
 TBD.
