@@ -104,6 +104,15 @@ journalctl --user -f
 ```
 5. Check out the database(s) using command line (`mysql -u USER -p PWD -h HOST`) or `phpmyadmin` or equivalent tools.
 
+The typical output from `journalctl -f --user`
+```text
+Mar 14 18:18:37 myhost systemd[1124]: Started MyQTTSense Linux client.
+Mar 14 18:18:37 myhost /my/home/dir/.local/bin/myqttsense_client.py[38015]: [INFO] Connected to MQTT broker
+Mar 14 18:18:37 myhost /my/home/dir/.local/bin/myqttsense_client.py[38015]: [INFO] Connected to SQL database
+Mar 14 18:18:37 myhost /my/home/dir/.local/bin/myqttsense_client.py[38015]: [INFO] subscribing
+Mar 14 18:18:58 myhost /my/home/dir/.local/bin/myqttsense_client.py[38015]: [INFO] new topic: sense/sht3x/c4:5b:be:62:87:e3 => `topic_sense_sht3x_c45bbe6287e3_20220314181857`
+```
+
 ### Other clients
 
 #### Mosquitto 
