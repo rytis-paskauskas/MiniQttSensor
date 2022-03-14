@@ -1,0 +1,15 @@
+[Unit]
+Description=MyQTTSense Linux client
+
+Wants=network.target
+After=syslog.target network.target network-online.target mosquitto.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python _SCRIPT_ _ARGV1_ _ARGV2_
+Restart=on-failure
+RestartSec=60
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
