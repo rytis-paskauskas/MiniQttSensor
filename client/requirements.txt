@@ -1,0 +1,8 @@
+kconfiglib
+logging
+paho
+mysql
+datetime
+systemd
+os
+sys

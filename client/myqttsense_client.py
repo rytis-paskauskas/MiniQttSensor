@@ -68,7 +68,7 @@ journalctl -f --user
 import kconfiglib
 import logging
 import paho.mqtt.client as mqtt
-import mysql.connector as mariadb
+import mysql.connector as sql
 from datetime import datetime
 from os import path
 from sys import argv
@@ -165,7 +165,7 @@ class DBManipulator:
         self.logger.setLevel(logging.DEBUG)
 
     def db_exists(self):
-        cnx=mariadb.connect(user=self.conf.usr,password=self.conf.pwd,host=self.conf.dbh)
+        cnx=sql.connect(user=self.conf.usr,password=self.conf.pwd,host=self.conf.dbh)
         cursor=cnx.cursor()
         cursor.execute(sql_query_db_exists(self.conf.dbn))
         res=cursor.fetchall()
@@ -174,7 +174,7 @@ class DBManipulator:
         return True if res else False
 
     def db_open(self):
-        self.cnx=mariadb.connect(user=self.conf.usr,password=self.conf.pwd,database=self.conf.dbn,host=self.conf.dbh)
+        self.cnx=sql.connect(user=self.conf.usr,password=self.conf.pwd,database=self.conf.dbn,host=self.conf.dbh)
         self.cursor=self.cnx.cursor()
 
     def db_close(self):
@@ -186,7 +186,7 @@ class DBManipulator:
         if t not in self.T.keys():
             tc=gen_tbl_name_components(t)
             # Create summary table:
-            cnx = mariadb.connect(user=self.conf.usr,password=self.conf.pwd,host=self.conf.dbh,database='information_schema')
+            cnx = sql.connect(user=self.conf.usr,password=self.conf.pwd,host=self.conf.dbh,database='information_schema')
             cursor = cnx.cursor()
             cursor.execute("SELECT `table_name` FROM `tables` WHERE `table_schema`='{}' AND `table_name` LIKE '{}_%'".format(self.conf.dbn,tc[0]))
             tbls =[t[0] for t in cursor.fetchall()]
@@ -260,7 +260,7 @@ class DBManipulator:
         m=DBManipulator(c)
         m.admin('root','secret')
         """
-        cnx = mariadb.connect(user=admin_user,password=admin_pwd,host=self.conf.dbh)
+        cnx = sql.connect(user=admin_user,password=admin_pwd,host=self.conf.dbh)
         cursor = cnx.cursor()
         cursor.execute("CREATE DATABASE IF NOT EXISTS `{}`".format(self.conf.dbn))
         cnx.commit()

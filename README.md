@@ -83,13 +83,18 @@ The payload is formatted as a JSON string
 
 ### Deploying `myqttsense_client`
 1. Configure the "Client" section in Kconfig.
-2. Install the client
+2. Install python prerequisites and install the client
 ```sh
+sudo pip install -r client/requirements.txt
+# or
+python -m pip install -r client/requirements.txt
+# and then
 install_client.sh
 ```
-3. Start (and) enable service
+3. Start (and enable) service
 ```sh
 systemctl --user start myqttsense_client.service
+# optionally also
 systemctl --user enable myqttsense_client.service
 ```
 4. Debug/troubleshoot `myqttsense_client`
