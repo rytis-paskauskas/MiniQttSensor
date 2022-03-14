@@ -2,9 +2,10 @@ menu "IoT device configuration"
     menu "MQTT settings"
         config MQTT_BROKER_URI
             string "Broker URI"
-            default "mqtts://192.168.1.1:8883"
+            default "mqtts://localhost:8883"
             help
-                The Broker's address (the part after slashes) should be the exactly as declared in the broker's certificate file.
+                The Broker's address (the part after slashes) must exactly match the declaration in the broker's certificate.
+                The substitutions won't work, for example 127.0.0.1, localhost, or any of its aliases ARE NOT INTERCHANGEABLE.
         config MQTT_CLIENT_TOPIC_HEADER
             string "Topic basename"
                 default "sense/sht3x"
@@ -14,10 +15,10 @@ menu "IoT device configuration"
     menu "WiFi connection settings"
         config WIFI_SSID
             string "WiFi SSID"
-            default "ssid"
+            default "wifi_ssid"
         config WIFI_PASSWORD
             string "WiFi Password"
-            default "password"
+            default "wifi_secret"
     endmenu
     menu "sht3x sensor settings"
         config MEASUREMENT_REFRESH_PERIOD
@@ -26,5 +27,30 @@ menu "IoT device configuration"
             default 5
             help
                 Seconds to wait between two consecutive sensor measurements.
+    endmenu
+endmenu
+menu "Client configuration"
+    menu "MySQL database"
+        config DB_URI
+            string "MySQL URI"
+            default "amikogio"
+            help
+                Location of the database. Default is local DB.
+        config DB_DBNAME
+            string "Database name"
+            default "myqttsense"
+            help
+                Please provide name of an existing database.
+                It is possible to use myqttsense_client.py to create the database (see the docstring).
+        config DB_USERNAME
+            string "Database username"
+            default "sql_user"
+            help
+                Please provide valid user that has privileges to modify the database.
+        config DB_PASSWORD
+            string "Database password"
+            default "sql_secret"
+            help
+                Please provide valid password.
     endmenu
 endmenu
