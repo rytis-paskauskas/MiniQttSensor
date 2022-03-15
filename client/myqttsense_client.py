@@ -263,11 +263,23 @@ class DBManipulator:
         cnx = sql.connect(user=admin_user,password=admin_pwd,host=self.conf.dbh)
         cursor = cnx.cursor()
         cursor.execute("CREATE DATABASE IF NOT EXISTS `{}`".format(self.conf.dbn))
+        cursor.execute("FLUSH PRIVILEGES")
         cnx.commit()
-        cursor.execute("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, INDEX, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON `{}`.* TO '{}'@'{}'".format(self.conf.dbn, self.conf.usr,self.conf.dbh))
+        cursor.execute("SELECT `user`, `host` FROM `mysql`.`user` WHERE `user`='{}' AND `host`='{}'".format(self.conf.usr,self.conf.dbh))
+        if cursor.fetchall():
+            print("User {} found".format(self.conf.usr))
+        else:
+            print("User not found. attempting to create user '{}'@'{}' ...".format(self.conf.usr,self.conf.dbh))
+            cursor.execute("CREATE USER '{}'@'{}' IDENTIFIED BY '{}'".format(self.conf.usr, self.conf.dbh, self.conf.pwd))
+            cnx.commit()
+            print("Success!")
+        cursor.execute("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, INDEX, DROP, ALTER, "
+                       "CREATE TEMPORARY TABLES, LOCK TABLES ON `{}`.* TO '{}'@'{}'"
+                       .format(self.conf.dbn, self.conf.usr,self.conf.dbh))
         cnx.commit()
         cursor.close()
         cnx.close()
+        print("Database '{}' is ready for '{}'@'{}'.".format(self.conf.dbn,self.conf.usr,self.conf.dbh))
 
 def main():
     assert len(argv)>2, "Please provide two command line arguments"
