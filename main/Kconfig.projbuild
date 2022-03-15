@@ -8,8 +8,8 @@ menu "IoT device configuration"
                 The substitutions won't work, for example 127.0.0.1, localhost, or any of its aliases ARE NOT INTERCHANGEABLE.
         config MQTT_CLIENT_TOPIC_HEADER
             string "Topic basename"
-                default "sense/sht3x"
-                help
+            default "sense/sht3x"
+            help
                 The actual topic will be constructed from this variable and the MAC address as BASENAME/MAC, i.e. each device running this app with a unique MAC address will get a unique topic. Additional information (warnings) will be published to BASENAME/log and the log message will carry the MAC identifier.
     endmenu
     menu "WiFi connection settings"
