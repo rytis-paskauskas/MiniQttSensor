@@ -1,7 +1,5 @@
 #! /usr/bin/env python
 # myqttsense_client.py --- MyQTTSense linux client  -*- mode: Python; coding: utf-8 -*- 
-__copyright__ = "Copyright (C) 2022, Rytis Paškauskas <rytis.paskauskas@gmail.com>"
-__author__    = "Rytis Paškauskas"
 """MyQTTSense linux client
 Author: Rytis Paškauskas
 Copyright (C) 2021-2022, Rytis Paškauskas <rytis.paskauskas@gmail.com>
@@ -65,6 +63,8 @@ Or, to check the progress, do
 journalctl -f --user
 
 """
+__copyright__ = "Copyright (C) 2021-2022, Rytis Paškauskas <rytis.paskauskas@gmail.com>"
+__author__    = "Rytis Paškauskas"
 import kconfiglib
 import logging
 import paho.mqtt.client as mqtt
