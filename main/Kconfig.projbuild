@@ -33,7 +33,7 @@ menu "Client configuration"
     menu "MySQL database"
         config DB_URI
             string "MySQL URI"
-            default "amikogio"
+            default "localhost"
             help
                 Location of the database. Default is local DB.
         config DB_DBNAME
