@@ -8,52 +8,55 @@ Created: 2021-04-19
 Last modified: 2022-03-14 18:28:44 (CET) +0100
 
 Description: MyQTTSense client works in tandem with the MyQTTSense app
-(Environmental sensing app based on sht3x sensor). 
+(Environmental sensing app based on sht3x sensor).
 
-The reason for providing a client is to make a record of measurements
-provided by the application (the app not keep a history of its
-measurements). This client is designed to function with 
-
-1. Multiple server applications;
+The purpose of this client is to provide measurement recording
+functionality (the IoT server app not keep a history of its
+measurements). It is designed to work with
+1. Multiple server deployments;
 2. Intermittent connectivity; it takes into account that a device or
 broker connection might not be constant.
 
-The client logs all readings into one SQL table per device (identified
-by device's MAC address) and it tracks connection by the time stamping
-current run. The client manipulates database tables to archive the old
-data from previous connections into a table without a timestamp. The
-old data is averaged by the hour. The variance and number of data
-points in each window are also recorded
+The client logs all topics into a SQL database, one table per device
+(identified by device's MAC address), and tracks history by time
+stamping each currently active topic. The client manipulates database
+tables and archives the old data from previous connections into a
+single table per device, sans the timestamp. The archived data is
+averaged by the hour. The variance and number of data points in each
+window are also recorded.
 
-To run the client, a dedicated MySQL database must be created
-separately, and before running the client. The reason to separate the
-database and client tasks are the potentially different access levels
-necessary for the two tasks (creating a SQL database may require
-higher privileges than those of running a database).
+The client configuration must be provided in the project's main
+Kconfig file (the default is main/Kconfig.projbuild). The client-specific
+settings can be found under the "Client configuration" menu. It is
+important that MySQL database credentials are correctly set.
 
-We need complete access this database (read, insert, create, delete
-tables) and and read-only access to the `information_schema` database.
+Before starting the client, a dedicated MySQL database must be
+available, created as a separate task. The reason for this task
+separation is the logic, and it is also a matter of security (it is
+possible, even desirable for security purposes, that a user, who will
+run a database, could not create, or destroy, any database).
 
-Creation of a database, on the other hand, may require a higher level
-privileges.
+A user needs only the read/write access to one database. It also needs
+read-only access to the `information_schema` database (assumed to be
+available).
 
-The client configuration must be provided in the project's Kconfig
-file. The client-specific settings can be found under the "Client
-configuration" menu. It is important that MySQL database credentials
-are correctly set.
+It is possible to create a database using this module, supplying MySQL
+admin credentialsto @DBManipulator.admin method, like so:
 
-It is possible to create a database using this file, specifically
-runnnig @DBManipulator class' @admin method with MySQL administrator's
-credentials:
-
+>>> from myqttsense_client import confReader
+>>> from myqttsense_client import DBManipulator
 >>> c=confReader('/path/to/Kconfig', '/path/to/cert/file')
 >>> m=DBManipulator(c)
->>> m.admin('username','secret')
+>>> m.admin('admin_user','admin_pwd')
 
-Running the client.
+Running the client
 
-The included script `install_client.sh` sets up `systemd` service
-called `myqttsense_client.service`. To start/stop/enable/status the
+While it is possible to run this python script standalone, the default
+setup is to run it as systemd service. The progress logging is set-up
+exclusively through systemd.
+
+The included script `install_client.sh` sets up `systemd --user` service
+called `myqttsense_client.service`. To start/stop/enable/status this
 service, do systemctl --user start myqttsense_client.service etc.
 
 To check the status of service, do
