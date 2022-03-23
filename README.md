@@ -13,17 +13,17 @@ Use your private or any public MQTT broker.
 
 Includes an (optional) "accumulator" client, which collects data into a MySQL database and bins older data from previously disconnected instances.
 
-The app and the client have been built and tested on Linux. 
-Since the SDK has been ported to other architectures, the app should build in Windows or MacOS as well. The client is a python script so it should also work, but the chosen client deployment through systemd is linux-specific.
+The app and the client were built and tested on Linux.
+I expect the app to compile on Windows and MacOS (because the API is architecture-agnostic) and the client, if executed as a standalone script, to work as well, provided that its prerequisites are met (because it is python script). Only the chosen deployment method using systemd is linux-specific.
 ## Hardware requirements
 
-- One, or more ESP8266- or ESP32-based boards,
-- One sht3x sensor per board and wires (four wires per sensor),
+- One or more ESP8266- or ESP32-based boards,
+- One sht3x sensor and 4 jumper cables per board;
 - Wifi connection (and access to Internet if using a LAN-external broker)
 - 5V or 3.3V power source (5V, if applicable for a board, works better with WiFi).
 
 This set-up is sufficient to build the app but additional items might be required depending on deployment decisions:
-- a rig for MQTT broker (Raspberry Pi, Cloud, ...)
+- a rig for the MQTT broker (Raspberry Pi, Cloud, ...)
 - device(s) to read/display data (a smartphone MQTT app, the included client, ...)
 
 ## Software prerequisites
