@@ -11,10 +11,10 @@ The app targets all ESP8266 and ESP32 boards. It has been tested with:
 
 Use your private or any public MQTT broker.
 
-Includes an (optional) "accumulator" client, which polls all data into a MySQL database and bins older data from previously disconnected instances.
+Includes an (optional) "accumulator" client, which collects data into a MySQL database and bins older data from previously disconnected instances.
 
 The app and the client have been built and tested on Linux. 
-The app should work on other architectures, but the client might not.
+Since the SDK has been ported to other architectures, the app should build in Windows or MacOS as well. The client is a python script so it should also work, but the chosen client deployment through systemd is linux-specific.
 ## Hardware requirements
 
 - One, or more ESP8266- or ESP32-based boards,
@@ -22,23 +22,23 @@ The app should work on other architectures, but the client might not.
 - Wifi connection (and access to Internet if using a LAN-external broker)
 - 5V or 3.3V power source (5V, if applicable for a board, works better with WiFi).
 
-This set-up is sufficient to build the app but additional items might be required depending on the deployment decisions:
-- a rig for hosting the MQTT broker (Raspberry Pi, Cloud, ...)
+This set-up is sufficient to build the app but additional items might be required depending on deployment decisions:
+- a rig for MQTT broker (Raspberry Pi, Cloud, ...)
 - device(s) to read/display data (a smartphone MQTT app, the included client, ...)
 
-## Software prerequisited
+## Software prerequisites
 This app has to be built using a board-specific  [Software Development Kit](https://www.espressif.com/en/products/sdks/esp-idf "ESP IDF by Espressif"):
 - [*ESP IDF*](https://github.com/espressif/esp-idf "ESP-IDF on Github") for ESP32-based boards,
 - [*ESP8266 RTOS SDK*](https://github.com/espressif/ESP8266_RTOS_SDK "ESP8266 RTOS SDK on Github") for ESP8266-based boards.
 
-To build the (optional) polling client the following are required:
+For building the (optional) client the following are required:
 - Python (see `client/requirements.txt` for the list of necessary modules)
 - MySQL or similar. The client must have full access to one database.
 - Systemd (optional) is used as a default deployment method but it is possible to run the script as a standalone.
 
 To deploy to a dedicated MQTT broker, one has to be able to setup and run a server.
 
-A public MQTT broker ([such as this one](https://test.mosquitto.org "public MQTT broker")) requires neigher system administration  competences nor setting up, and could be a viable alternative at least for testing.
+A public MQTT broker ([such as this one](https://test.mosquitto.org "public MQTT broker")) requires neither system administration competences nor setting up, and could be a viable alternative, at least for testing purposes.
 
 To enjoy the outputs of this app, a MQTT client is required. The easiest is to use a MQTT client on a smartphone (just search on the market, I'm sure there are several options available).
 
